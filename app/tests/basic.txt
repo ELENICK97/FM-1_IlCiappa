@@ -1,0 +1,154 @@
+# IL CIAPPA in the host simulator:
+#   base/tools/build.py app --host && app/build/host/ilciappa_host app/tests/basic.txt app/build/host
+wait 700
+shot boot.png
+expect mode 0
+# CIAPPA: one key, the word at its pitch
+wav canta.wav
+key 7 down
+wait 120
+expect voices 1
+shot canta.png
+key 7 up
+wait 900
+expect voices 0
+# a scale, each note its own CIAPPA
+strum 0 7 220
+wait 1200
+wavstop
+# CIAAAAPPA: held for two seconds, the A grows
+turn SELECT 1
+wait 30
+expect mode 1
+wav tieni.wav
+key 12 down
+wait 2200
+expect extra_a >2
+shot tieni.png
+key 12 up
+wait 900
+wavstop
+expect voices 0
+# NASTRO: low and high
+turn SELECT 1
+wav nastro.wav
+tapkey 0
+wait 1500
+tapkey 26
+wait 900
+wavstop
+# APPAIC
+turn SELECT 1
+wav rovescio.wav
+tapkey 7
+wait 1100
+wavstop
+# CI-CI-CIAPPA
+turn SELECT 1
+wav balbuzie.wav
+tapkey 9
+wait 1500
+wavstop
+# PAPPACIA: random syllables while held
+turn SELECT 1
+wav mescola.wav
+key 9 down
+wait 2500
+key 9 up
+wait 800
+wavstop
+# CORO
+turn SELECT 1
+wav coro.wav
+tapkey 7
+wait 1300
+expect mode 6
+wavstop
+# ROBOT
+turn SELECT 1
+wav robot.wav
+tapkey 7
+wait 1000
+tapkey 14
+wait 1000
+wavstop
+expect mode 7
+# the voices: each says it once
+turn SELECT 1
+expect mode 0
+wav voci.wav
+tapkey 7
+wait 900
+turn PRESET 1
+expect voice 1
+tapkey 7
+wait 900
+turn PRESET 1
+tapkey 7
+wait 900
+turn PRESET 1
+tapkey 7
+wait 900
+wavstop
+turn PRESET 1
+# GNOMO and ORCO, long and short
+turn PRESET 1
+expect voice 0
+wav timbro.wav
+spin K2 8
+tapkey 7
+wait 900
+spin K2 -16
+tapkey 7
+wait 900
+spin K2 8
+spin K1 6
+tapkey 7
+wait 2500
+spin K1 -10
+tapkey 7
+wait 600
+wavstop
+spin K1 4
+expect stretch 0
+# the song, with echo
+spin K4 4
+wav canzone.wav
+tap PLAY
+wait 30
+expect song 1
+wait 7600
+shot canzone.png
+tap PLAY
+wait 1200
+wavstop
+spin K4 -4
+# ARP: three keys held
+tap ARP
+expect arp 1
+wav arp.wav
+key 0 down
+key 4 down
+key 7 down
+wait 2500
+key 0 up
+key 4 up
+key 7 up
+tap ARP
+wait 800
+wavstop
+# a silly button
+tap ENV
+wait 50
+shot joke.png
+wait 900
+# settings across a reboot
+turn SELECT 3
+tap OCT+
+tap SAVE
+wait 30
+expect dirty 0
+reboot
+wait 700
+expect mode 3
+expect octave 1

@@ -1,0 +1,13 @@
+# IL CIAPPA's build settings (fm1-base tools/build.py)
+name = "ILCIAPPA"
+id_prefix = "FM-1_77"          # package identity: dev FM-1_7700, releases FM-1_77XXYYZZ
+usb_manufacturer = "IL CIAPPA"
+usb_product = "IL CIAPPA FM-1"
+o2 = ["dsp.c"]                 # the engine at -O2
+words = "words.tsv"
+ble = false
+# the site
+tagline = "un sintetizzatore che dice solo una parola"
+repo = ""
+licence = "MPL-2.0"
+credits = "Built on fm1-base and felucca-bsp. Voices made with espeak-ng."
